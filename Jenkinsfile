@@ -10,19 +10,19 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t jenkins-docker-demo .'
+                sh 'docker build -t jenkins-docker-demo .'
             }
         }
 
         stage('Stop Old Container') {
             steps {
-                bat 'docker rm -f jenkins-docker-demo || exit 0'
+                sh 'docker rm -f jenkins-docker-demo || true'
             }
         }
 
         stage('Run Container') {
             steps {
-                bat 'docker run -d -p 4000:4000 --name jenkins-docker-demo jenkins-docker-demo'
+                sh 'docker run -d -p 4000:4000 --name jenkins-docker-demo jenkins-docker-demo'
             }
         }
     }
